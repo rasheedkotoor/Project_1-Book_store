@@ -1,0 +1,130 @@
+{% extends 'admin/main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> About The Book </h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admin/booklist">Book List</a></li>
+          <li class="breadcrumb-item active" aria-current="page">View Book</li>
+        </ol>
+      </nav>
+    </div>
+
+
+    <div class="row">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="text-info">{{ book.book_name }}</h4>
+            <form class="form-sample" action="/admin/view_book/{{ book.id }}/">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                      <img class="img-fluid" src=" {{ book.imageurl1 }} " alt="image1" style="width:40%;height:100%;" />
+                      <img class="img-fluid" src=" {{ book.imageurl2 }} " alt="image2" style="width:40%;height:100%;" />
+                  </div>
+
+                  <div class="form-group">
+
+<!--                        <input type="file" name="img" id="fileupload" class="file-upload-default">-->
+                        <div class="input-group col-xs-12">
+
+                        </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" name="description" id="exampleTextarea1" disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px" rows="4"
+                              placeholder="Description" required>{{ book.description }}</textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <label>Name</label>
+                      <input type="text" name="book_n" class="form-control" disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                             placeholder="Book Name" value="{{ book.name }}" required />
+                    </div>
+                    <div class="col-sm-12 mt-3">
+                      <label>Author</label>
+                      <input type="text" name="author_n" class="form-control" disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                             placeholder="Author Name" value="{{ book.author.name }}" required />
+                    </div>
+                    <div class="col-sm-12 mt-3">
+                      <label>Publisher</label>
+                      <input type="text" name="publish" class="form-control"disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                             placeholder="Publisher" value="{{ book.publisher }}" required />
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                      <label>Published Year</label>
+                      <input type="number" name="year" class="form-control"disabled style="color:black;background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                             placeholder="Publication year" value="{{ book.year }}" required />
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                      <label>Edition</label>
+                      <input type="number" name="edition" class="form-control"disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                             placeholder="Edition" value="{{ book.edition }}" required/>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                              <label>Category</label>
+                              <input type="number" name="year" class="form-control"disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                              placeholder="English" value="{{ book.category.category }}" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                      <label>Total Pages</label>
+                      <input type="number" name="page_no" class="form-control"disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                             placeholder="Number of Pages" value="{{ book.page_no }}" required/>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <label>Price</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-primary text-white">Rs</span>
+                            </div>
+                            <input type="number" name="price" class="form-control" disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                                   placeholder="Price" value="{{ book.price }}"
+                                   aria-label="Amount (to the nearest dollar)" required>
+                            <div class="input-group-append">
+                              <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <label>Offer</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-primary text-white">Offer </span>
+                            </div>
+                            <input type="number" name="offer" class="form-control" disabled style="color:black; background-color: #9C9F9E; font-weight: bold; font-size:20px"
+                                   placeholder="Offer" value="{{ book.offer }}"
+                                   aria-label="Amount (to the nearest dollar)" required>
+                            <div class="input-group-append">
+                              <span class="input-group-text"> % </span>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- content-wrapper ends -->
+
+
+{% endblock content %}

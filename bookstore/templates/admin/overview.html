@@ -1,0 +1,512 @@
+{% extends 'admin/main.html' %}
+{% load static %}
+{% block content %}
+  <div class="main-panel">
+      <div class="content-wrapper">
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">&#8377; {{total|floatformat}}</h3>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-success ">
+                        <span class="material-icons"> account_balance_wallet </span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Total Revenue</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">&#8377; {{ monthly_total|floatformat }}</h3>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-success">
+                        <span class="material-icons"> account_balance_wallet</span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Monthly Income</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">&#8377; {{ daily_total|floatformat }}</h3>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-warning">
+                        <span class="material-icons"> account_balance_wallet</span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="d-flex align-items-center align-self-start">
+                        <h3 class="mb-0">{{ order_count }}</h3>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="icon icon-box-warning ">
+                        <span class="material-icons">receipt</span>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="text-muted font-weight-normal">Total Orders</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- first four box end -->
+          <!-- transaction-history + new orders start -->
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Transaction History</h4>
+                  <canvas id="transaction-history" class="transaction-chart"></canvas>
+                  <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                    <div class="text-md-center text-xl-left">
+                      <h6 class="mb-1">Transfer to Paypal</h6>
+                    </div>
+                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                      <h6 class="font-weight-bold mb-0">&#8377; {{ paypal_total|floatformat }}</h6>
+                    </div>
+                  </div>
+                  <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                    <div class="text-md-center text-xl-left">
+                      <h6 class="mb-1">Transfer to Razorpay</h6>
+                    </div>
+                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                      <h6 class="font-weight-bold mb-0">&#8377; {{ razor_pay_total|floatformat }}</h6>
+                    </div>
+                  </div>
+                  <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                    <div class="text-md-center text-xl-left">
+                      <h6 class="mb-1">Cash on Delivery </h6>
+                    </div>
+                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                      <h6 class="font-weight-bold mb-0">&#8377; {{ c_o_d_total|floatformat }}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- transaction-history end  -->
+            <!-- Top Book status  -->
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="row">
+                <div class="p-4 col-xl-12  grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-9">
+                          <div class="d-flex align-items-center align-self-start">
+                            <h1 style="font-size:70px" class="mb-0 mx-5 mt-2">{{ user_count }}</h1>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="icon icon-box-success mt-5">
+                            <span class="material-icons"> account_box </span>
+                          </div>
+                        </div>
+                      </div>
+                      <h3 class="text-muted font-weight-normal mt-4">Total Customers</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4 col-xl-12  grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-9">
+                          <div class="d-flex align-items-center align-self-start">
+                            <h1 style="font-size:70px" class="mb-0 mt-2 mx-5">{{ book_count }}</h1>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="icon icon-box-success mt-5">
+                            <span class="material-icons"> auto_stories </span>
+                          </div>
+                        </div>
+                      </div>
+                      <h3 class="text-muted font-weight-normal mt-4">Total Books</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- top books hidden -->
+            <div class="col-md-8 grid-margin stretch-card">
+<!--              <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                  <div class="d-flex flex-row justify-content-between">-->
+<!--                    <h4 class="card-title mb-1">Top Books</h4>-->
+<!--                    <p class="text-muted mb-1">Your data status</p>-->
+<!--                  </div>-->
+<!--                  <div class="row">-->
+<!--                    <div class="col-12">-->
+<!--                      <div class="preview-list">-->
+<!--                        <div class="preview-item border-bottom">-->
+<!--                          <div class="preview-thumbnail">-->
+<!--                            <div class="preview-icon bg-primary">-->
+<!--                              <i class="mdi mdi-file-document"></i>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="preview-item-content d-sm-flex flex-grow">-->
+<!--                            <div class="flex-grow">-->
+<!--                              <h6 class="preview-subject">some book name</h6>-->
+<!--                              <p class="text-muted mb-0">author name</p>-->
+<!--                            </div>-->
+<!--                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">-->
+<!--                              <p class="text-muted">price</p>-->
+<!--                              <p class="text-muted mb-0">12 Purchase,  32 wishlist</p>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+            </div>
+            <!-- Top books end -->
+          </div>
+          <!-- End of content wraper  -->
+          <!-- revenue sales purchase removed -->
+          <!-- order status -->
+          <div class="row ">
+            <div class="col-12 grid-margin">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <h4 class="card-title">Last Ten Orders</h4>
+                    <canvas id="areaChart" style="height: 117px; display: block; width: 434px;" width="542" height="171" class="chartjs-render-monitor"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                      <!-- order status end -->
+                      <!-- new users start -->
+                      <div class="row">
+<!--                          <div class="col-md-6 col-xl-4 grid-margin stretch-card">-->
+<!--                              <div class="card">-->
+<!--                                  <div class="card-body">-->
+<!--                                      <div class="d-flex flex-row justify-content-between">-->
+<!--                                          <h4 class="card-title">New Users</h4>-->
+<!--                                          <p class="text-muted mb-1 small">View all</p>-->
+<!--                                      </div>-->
+<!--                                      <div class="preview-list">-->
+<!--                                          <div class="preview-item border-bottom">-->
+<!--                                              <div class="preview-thumbnail">-->
+<!--                                                  <img src="{% static 'admin/images/admin.jpg' %}" alt="image" class="rounded-circle" />-->
+<!--                                              </div>-->
+<!--                                              <div class="preview-item-content d-flex flex-grow">-->
+<!--                                                  <div class="flex-grow">-->
+<!--                                                      <div class="d-flex d-md-block d-xl-flex justify-content-between">-->
+<!--                                                          <h6 class="preview-subject">Leonard</h6>-->
+<!--                                                          <p class="text-muted text-small">5 minutes ago</p>-->
+<!--                                                      </div>-->
+<!--                                                      <p class="text-muted">Well, it seems to be working now.</p>-->
+<!--                                                  </div>-->
+<!--                                              </div>-->
+<!--                                          </div>-->
+<!--                                      </div>-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                          </div>-->
+
+
+
+                            <!-- new users end -->
+                            <!-- new reviews -->
+                            <!-- <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+                    <div class="content-wrapper">
+                     first four box row start -->
+                <!-- new review end -->
+                <!-- to do list -->
+                <div class="col-md-12 col-xl-4 grid-margin stretch-card">
+<!--                  <div class="card">-->
+<!--                    <div class="card-body">-->
+<!--                      <h4 class="card-title">To do list</h4>-->
+<!--                      <div class="add-items d-flex">-->
+<!--                        <input type="text" class="form-control todo-list-input" placeholder="enter task..">-->
+<!--                        <button class="add btn btn-primary todo-list-add-btn">Add</button>-->
+<!--                      </div>-->
+<!--                      <div class="list-wrapper">-->
+<!--                        <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">-->
+<!--                          <li>-->
+<!--                            <div class="form-check form-check-primary">-->
+<!--                              <label class="form-check-label">-->
+<!--                                <input class="checkbox" type="checkbox"> Create invoice </label>-->
+<!--                            </div>-->
+<!--                            <i class="remove mdi mdi-close-box"></i>-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            <div class="form-check form-check-primary">-->
+<!--                              <label class="form-check-label">-->
+<!--                                <input class="checkbox" type="checkbox"> Meeting with Alita </label>-->
+<!--                            </div>-->
+<!--                            <i class="remove mdi mdi-close-box"></i>-->
+<!--                          </li>-->
+<!--                          <li class="completed">-->
+<!--                            <div class="form-check form-check-primary">-->
+<!--                              <label class="form-check-label">-->
+<!--                                <input class="checkbox" type="checkbox" checked> Prepare for presentation </label>-->
+<!--                            </div>-->
+<!--                            <i class="remove mdi mdi-close-box"></i>-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            <div class="form-check form-check-primary">-->
+<!--                              <label class="form-check-label">-->
+<!--                                <input class="checkbox" type="checkbox"> Plan weekend outing </label>-->
+<!--                            </div>-->
+<!--                            <i class="remove mdi mdi-close-box"></i>-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            <div class="form-check form-check-primary">-->
+<!--                              <label class="form-check-label">-->
+<!--                                <input class="checkbox" type="checkbox"> Pick up kids from school </label>-->
+<!--                            </div>-->
+<!--                            <i class="remove mdi mdi-close-box"></i>-->
+<!--                          </li>-->
+<!--                        </ul>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+                </div>
+                <!-- to do list end -->
+              </div>
+
+              <!-- row end -->
+        </div>
+  </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<!--line chart-->
+<script>
+$(function() {
+  'use strict';
+  $.fn.andSelf = function() {
+    return this.addBack.apply(this, arguments);
+  }
+  var areaData = {
+    labels: [ {% for date in label_date %} "{{ date }}", {% endfor %}],
+    datasets: [{
+        data: [ {% for order in data_order %} "{{order|floatformat}}", {% endfor %}],
+        backgroundColor: [
+          "#00d25b"
+        ]
+      }
+    ]
+  };
+  var areaOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    segmentShowStroke: false,
+    cutoutPercentage: 70,
+    elements: {
+      arc: {
+          borderWidth: 0
+      }
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      enabled: true
+    }
+  }
+  if ($("#areaChart").length) {
+    var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+    var areaChart = new Chart(areaChartCanvas, {
+      type: 'line',
+      data: areaData,
+      options: areaOptions
+    });
+  }
+});
+</script>
+<!--pie chart of transaction history-->
+<script>
+  (function($) {
+  'use strict';
+  $.fn.andSelf = function() {
+    return this.addBack.apply(this, arguments);
+  }
+  $(function() {
+    if ($("#currentBalanceCircle").length) {
+      var bar = new ProgressBar.Circle(currentBalanceCircle, {
+        color: '#000',
+        strokeWidth: 12,
+        trailWidth: 12,
+        trailColor: '#0d0d0d',
+        easing: 'easeInOut',
+        duration: 1400,
+        text: {
+          autoStyleContainer: false
+        },
+        from: { color: '#d53f3a', width: 12 },
+        to: { color: '#d53f3a', width: 12 },
+        step: function(state, circle) {
+          circle.path.setAttribute('stroke', state.color);
+          circle.path.setAttribute('stroke-width', state.width);
+
+          var value = Math.round(circle.value() * 100);
+          circle.setText('');
+
+        }
+      });
+
+      bar.text.style.fontSize = '1.5rem';
+      bar.animate(0.4);  // Number from 0.0 to 1.0
+    }
+    if ($("#transaction-history").length) {
+      var areaData = {
+        labels: ["Paypal", "Razorpay","Cash on Delivery"],
+        datasets: [{
+            data: [{{paypal_total}}, {{razor_pay_total|floatformat}}, {{c_o_d_total}}],
+            backgroundColor: [
+              "#ffff","#00d25b","#ffab00"
+            ]
+          }
+        ]
+      };
+      var areaOptions = {
+        responsive: true,
+        maintainAspectRatio: true,
+        segmentShowStroke: false,
+        cutoutPercentage: 70,
+        elements: {
+          arc: {
+              borderWidth: 0
+          }
+        },
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true
+        }
+      }
+      var transactionhistoryChartPlugins = {
+        beforeDraw: function(chart) {
+          var width = chart.chart.width,
+              height = chart.chart.height,
+              ctx = chart.chart.ctx;
+
+          ctx.restore();
+          var fontSize = 1;
+          ctx.font = fontSize + "rem sans-serif";
+          ctx.textAlign = 'left';
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#ffffff";
+
+          var text = "₹ {{total|floatformat}}",
+              textX = Math.round((width - ctx.measureText(text).width) / 2),
+              textY = height / 2.4;
+
+          ctx.fillText(text, textX, textY);
+
+          ctx.restore();
+          var fontSize = 0.75;
+          ctx.font = fontSize + "rem sans-serif";
+          ctx.textAlign = 'left';
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#6c7293";
+
+          var texts = "Total",
+              textsX = Math.round((width - ctx.measureText(text).width) / 1.93),
+              textsY = height / 1.7;
+
+          ctx.fillText(texts, textsX, textsY);
+          ctx.save();
+        }
+      }
+      var transactionhistoryChartCanvas = $("#transaction-history").get(0).getContext("2d");
+      var transactionhistoryChart = new Chart(transactionhistoryChartCanvas, {
+        type: 'doughnut',
+        data: areaData,
+        options: areaOptions,
+        plugins: transactionhistoryChartPlugins
+      });
+    }
+
+    if ($('#owl-carousel-basic').length) {
+      $('#owl-carousel-basic').owlCarousel({
+        loop: true,
+        margin: 10,
+        dots: false,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 4500,
+        navText: ["<i class='mdi mdi-chevron-left'></i>", "<i class='mdi mdi-chevron-right'></i>"],
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 1
+          },
+          1000: {
+            items: 1
+          }
+        }
+      });
+    }
+    var isrtl = $("body").hasClass("rtl");
+    if ($('#owl-carousel-rtl').length) {
+      $('#owl-carousel-rtl').owlCarousel({
+        loop: true,
+        margin: 10,
+        dots: false,
+        nav: true,
+        rtl: isrtl,
+        autoplay: true,
+        autoplayTimeout: 4500,
+        navText: ["<i class='mdi mdi-chevron-right'></i>", "<i class='mdi mdi-chevron-left'></i>"],
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 1
+          },
+          1000: {
+            items: 1
+          }
+        }
+      });
+    }
+  });
+})(jQuery);
+</script>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+{% endblock content %}

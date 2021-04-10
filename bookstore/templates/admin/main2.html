@@ -1,0 +1,300 @@
+
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | BookStore</title>
+
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="">
+        <!-- ION Slider -->
+        <link rel="stylesheet" href="{% static 'user/css/line.css' %}">
+        <link rel="stylesheet" href="{% static 'user/css/ion.rangeSlider.min.css' %}">
+        <!-- Bootstrap Css -->
+        <link href="{% static 'user/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <!-- <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />-->
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" integrity="sha512-xnwMSDv7Nv5JmXb48gKD5ExVOnXAbNpBWVAXTo9BJWRJRygG8nwQI81o5bYe8myc9kiEF/qhMGPjkSsF06hyHA==" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css" integrity="sha512-vIgFb4o1CL8iMGoIF7cYiEVFrel13k/BkTGvs0hGfVnlbV6XjAA0M0oEHdWqGdAVRTDID3vIZPOHmKdrMAUChA==" crossorigin="anonymous" />
+        <!-- App Css-->
+        <link href="{% static 'user/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'user/css/style2.css' %}" rel="stylesheet" type="text/css" />
+  </head>
+      <body>
+            <div id="layout-wrapper">
+
+                <header id="page-topbar">
+                    <div class="navbar-header">
+                        <div class="d-flex">
+
+                            <!-- App Search-->
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item waves-effect" id=""
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="rounded-circle header-profile-user" src="{% static 'user/images/booklogo.jpg' %}"
+                                        alt="Header Avatar">
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">BOOK STORE</span>
+                                    <i class=" d-none d-xl-inline-block font-size-15"></i>
+                                </button>
+                            </div>
+                            <div class="dropdown d-inline-block">
+                                <button type="" class="btn header-item " id="dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <i class=" d-none d-xl-inline-block font-size-15"></i>
+                                </button>
+                            </div>
+                            <form class="app-search d-none d-lg-block ml-4">
+                                <div  class="position-relative">
+                                    <input tabindex="0" type="text" class="form-control" placeholder="Search...">
+                                    <span class="uil-search"></span>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="dropdown d-inline-block d-lg-none ms-2">
+                                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="uil-search"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                                    aria-labelledby="page-header-search-dropdown">
+                                    <form class="p-3">
+                                        <div class="form-group m-0">
+                                            <div class="input-group">
+                                                <input type="text" style="padding-left:40px;" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class=" d-inline-block language-switch">
+                                <a href="/"  class="btn header-item noti-icon waves-effect">
+                                    <p class="mt-3">HOME</p>
+                                </a>
+                                <!-- drop down hidden-->
+                            </div>
+                            <div class="dropdown d-inline-block language-switch">
+                                <button type="button" class="btn header-item noti-icon waves-effect"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BOOKS
+                                </button>
+                                <!-- drop down hidden-->
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    {% for cat in cats %}
+                                    <a href="/category/{{ cat.id }}" class="dropdown-item notify-item">{{ cat.category }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="dropdown d-inline-block language-switch">
+                                <button type="button" class="btn header-item noti-icon waves-effect"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">AUTHORS
+                                </button>
+                                <!-- drop down hidden-->
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    {% for aut in auts %}
+                                    <a href="/author/{{ aut.id }}" class="dropdown-item notify-item">{{ aut.name }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="dropdown d-none d-lg-inline-block ms-1">
+                                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                                    <i class="uil-minus-path"></i>
+                                </button>
+                            </div>
+
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item waves-effect" id="page-header-notifications-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <!--                                <span style="width:20px; top:-17px; left:32px" class="badge bg-danger rounded-pill">3</span>-->
+                                    CART
+                                    <i class="uil-shopping-cart d-none d-xl-inline-block font-size-24"></i>
+                                    <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="/cart/"><i class="uil uil-shopping-cart font-size-18 align-middle text-muted me-1"></i>
+                                        <span class="align-middle">My Cart</span></a>
+                                    <a class="dropdown-item" href="/wishlist/"><i class="uil uil-heart font-size-18 align-middle text-muted me-1"></i>
+                                        <span class="align-middle">Wishlist</span></a>
+                                </div>
+                            </div>
+
+                            {% if user.is_authenticated %}
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <!--                                <img class="rounded-circle header-profile-user" src="{% static 'user/images/avatar-2.jpg' %}"-->
+    <!--                                    alt="Header Avatar">-->
+                                    <i class="uil-user d-none d-xl-inline-block font-size-24"></i>
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
+                                    <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="/profile/"><i class="uil uil-user font-size-18 align-middle text-muted me-1"></i>
+                                        <span class="align-middle">Profile</span></a>
+                                    <a class="dropdown-item" href="/logout/"><i class="uil uil-sign-out-alt font-size-18 align-middle text-muted me-1"></i>
+                                        <span class="align-middle">Log Out</span></a>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item waves-effect" id="page-headser-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="uil-user d-none d-xl-inline-block font-size-24"></i>
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">Account</span>
+                                    <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="/login/"><i class="uil uil-sign-in-alt font-size-18 align-middle text-muted me-1"></i>
+                                        <span class="align-middle">Log In</span></a>
+                                    <a class="dropdown-item" href="/signup/"><i class="uil uil-sign-in-alt font-size-18 align-middle text-muted me-1"></i>
+                                        <span class="align-middle">Sign Up</span></a>
+                                </div>
+
+                            </div>
+                            {% endif %}
+                            <div class="dropdown d-inline-block">
+                                <button type="" class="btn header-item " id="user-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <i class=" d-none d-xl-inline-block font-size-15"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- ========== Left Sidebar Start ========== -->
+                <div class="vertical-menu">
+
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="{% static 'user/images/booklogo.jpg' %}" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{% static 'user/images/booklogo.jpg' %}" alt="" height="20">
+                            </span>
+                        </a>
+
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="{% static 'user/images/booklogo.jpg' %}" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{% static 'user/images/booklogo.jpg' %}" alt="" height="20">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+
+                    <div data-simplebar="init" class="sidebar-menu-scroll"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: -16.8px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
+
+                        <!--- Sidemenu -->
+                        <div id="sidebar-menu" class="mm-active">
+                            <!-- Left Menu Start -->
+                            <ul class="metismenu list-unstyled mm-show" id="side-menu">
+                                <li class="menu-title">Menu</li>
+
+                                <li>
+                                    <a href="index.html">
+                                        <i class="uil-home-alt"></i><span class="badge rounded-pill bg-primary float-end">01</span>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-title">Apps</li>
+
+                                <li>
+                                    <a href="calendar.html" class="waves-effect">
+                                        <i class="uil-calender"></i>
+                                        <span>Calendar</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="chat.html" class=" waves-effect">
+                                        <i class="uil-comments-alt"></i>
+                                        <span class="badge rounded-pill bg-warning float-end">New</span>
+                                        <span>Chat</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Sidebar -->
+                    </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 1229px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 381px; transform: translate3d(0px, 83px, 0px); display: block;"></div></div></div>
+                </div>
+
+
+            {% block content %}
+
+
+            {% endblock content %}
+
+
+
+              <footer id="footer"><!--Footer-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            .
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="" target="_blank" class="text-reset">Book-Store</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <p class="pull-left"><script>document.write(new Date().getFullYear())</script> © Book-Store</p>
+                            <p class="pull-right">Designed by <span><a target="_blank" href="">Rasheed</a></span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </footer><!--/Footer-->
+            </div>
+            <!-- END layout-wrapper -->
+
+            <!-- JAVASCRIPT -->
+        <script src="{% static 'user/js/jquery.min.js' %}"></script>
+        <script src="{% static 'user/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'user/js/metisMenu.min.js' %}"></script>
+        <script src="{% static 'user/js/simplebar.min.js' %}"></script>
+        <script src="{% static 'user/js/waves.min.js' %}"></script>
+        <script src="{% static 'user/js/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'user/js/jquery.counterup.min.js' %}"></script>
+<!--        <script src="{% static 'user/js/ion.rangeSlider.min.js' %}"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js" integrity="sha512-kZsqvmw94Y8hyhwtWZJvDtobwQ9pLhF1DuIvcqSuracbRn6WJs1Ih+04fpH/8d1CFKysp7XA1tR0Aa2jKLTQUg==" crossorigin="anonymous"></script>
+        <script src="{% static 'user/js/product-filter-range.init.js' %}"></script>
+        <script src="{% static 'user/js/app.js' %}"></script>
+        <script src="{% static 'user/js/main.js' %}"></script>
+</body>
+
+
+</html>

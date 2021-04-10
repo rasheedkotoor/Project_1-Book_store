@@ -1,0 +1,114 @@
+{% extends 'user/main.html'%}
+{% load static %}
+{% block content %}
+
+<div id="layout-wrapper">
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">Edit Profile</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="/">Book-Store</a></li>
+                                    <li class="breadcrumb-item"><a href="/profile/">Profile</a></li>
+                                    <li class="breadcrumb-item active">Edit Profile</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Edit Your Profile</h4>
+
+                                    <!-- Seller Details -->
+
+                                    <section id="vertical-example-p-0" role="tabpanel" aria-labelledby="vertical-example-h-0" class="body current" aria-hidden="false">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="mb-3">
+                                                        <label for="verticalnav-phoneno-input">Profile Picture</label>
+                                                        <input type="file" class="form-control" id="profile_pic">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="verticalnav-firstname-input">First name</label>
+                                                        <input type="text" class="form-control" id="verticalnav-firstname-input">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="verticalnav-lastname-input">Last name</label>
+                                                        <input type="text" class="form-control" id="verticalnav-lastname-input">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="verticalnav-phoneno-input">Phone</label>
+                                                        <input type="text" class="form-control" id="verticalnav-phoneno-input">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="verticalnav-email-input">Email</label>
+                                                        <input type="email" class="form-control" id="verticalnav-email-input">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="verticalnav-address-input">Address</label>
+                                                        <textarea id="verticalnav-address-input" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </section>
+
+                                    <!-- Company Document -->
+
+
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+
+    </div>
+    <!-- end main content-->
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock content %}

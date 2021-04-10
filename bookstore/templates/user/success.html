@@ -1,0 +1,95 @@
+{% extends 'user/main.html'%}
+{% load static %}
+{% block content %}
+
+<div id="layout-wrapper">
+    <div class="">
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <a href="/"><h4 class="mb-0">Home</h4></a>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="/">Book-Store</a></li>
+                                    <li class="breadcrumb-item active">Checkout</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-xl-2">
+
+
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="custom-accordion">
+
+
+
+
+                            <!---------------------------------------->
+                            <!-------------- Payment info ----------->
+                            <!---------------------------------------->
+                            <div class="card">
+                                <a href="#checkout-paymentinfo-collapse" class="collapsed text-dark" data-bs-toggle="collapse">
+                                    <div class="p-4">
+
+                                        <div class="d-flex align-items-center">
+
+                                        </div>
+
+                                    </div>
+                                </a>
+
+                                <div id="checkout-paymentinfo-collapse" class="">
+                                    <div class="p-4 border-top">
+                                        <div>
+                                            <div class="row align-items-center">
+                                                <img class="text-center" style="height:300px; width:500px; left:14%" src="{% static 'user/images/order_placed.jpg' %}">
+                                            </div>
+                                            <div class="flex-1 overflow-hidden">
+                                                <h5 class="font-size-24 mb-3 text-center">Your Order placed</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-6">
+                                    <a href="/" class="btn btn-link text-muted">
+                                        <i class="uil uil-arrow-left me-1"></i> Continue Shopping </a>
+                                </div> <!-- end col -->
+                                <div class="col-sm-6">
+                                    <div class="text-sm-end mt-2 mt-sm-0">
+                                        <a href="/profile/" class="btn btn-success" id="checkout">
+                                            <i class="uil uil-clipboard-notes me-1"></i> Order History </a>
+                                    </div>
+                                </div> <!-- end col -->
+                            </div> <!-- end row-->
+
+                        </div>
+
+                    </div>
+            </div> <!-- container-fluid -->
+        </div><!-- End Page-content -->
+
+</div>
+
+    </div><!-- end main content-->
+
+</div><!-- END layout-wrapper -->
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% endblock content %}

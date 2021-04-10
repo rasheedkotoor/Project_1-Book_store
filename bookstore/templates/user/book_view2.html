@@ -1,0 +1,110 @@
+{% extends 'user/main.html'%}
+{% load static %}
+{% block content %}
+
+<section id="slider"><!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Category</h2>
+                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                        {% for cat in cats %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/category/{{ cat.id }}">{{ cat.category }}</a></h4>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div><!--/category-products-->
+                    <div class="brands_products"><!--brands_products-->
+                        <h2>Authors</h2>
+                        <div class="brands-name">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#"> <span class="pull-right">(50)</span>Shashi Tharoo</a></li>
+                                <li><a href="#"> <span class="pull-right">(56)</span>APJ</a></li>
+                            </ul>
+                        </div>
+                    </div><!--/brands_products-->
+
+                    <div class="price-range"><!--price-range-->
+                        <h2>Price Range</h2>
+                        <div class="well text-center">
+                             <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
+                             <b class="pull-left">Rs 0</b> <b class="pull-right">Rs 600</b>
+                        </div>
+                    </div><!--/price-range-->
+
+                    <div class="shipping text-center"><!--shipping-->
+                        <img src="" alt="" />
+                    </div><!--/shipping-->
+
+                </div>
+            </div>
+
+
+				<div class="col-sm-9">
+					<div class="blog-post-area">
+						<h2 class="title text-center">Book Details</h2>
+
+
+						<div class="single-blog-post">
+							<div class="post-meta">
+								<ul>
+									<li><i class="fa fa-clock-o"></i>Category: {{ book.category.category }}</li>
+									<li><i class="fa fa-calendar"></i>Published Year: {{ book.year }}</li>
+                                    <li><i class="fa fa-calendar"></i>Edition: {{ book.edition }}</li>
+								</ul>
+								<span>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+								</span>
+							</div>
+							<a href="">
+								<img style="width:200px; height:300px;" class="img-fluid" src="{{ book.imageurl1 }}" alt="">
+                                <img style="width:200px; height:300px;" class="img-fluid" src="{{ book.imageurl2 }}" alt="">
+							</a>
+
+							<h2>{{ book.book_name }}</h2>
+							<h3>{{ book.author_name }}</h3>
+
+							<p>{{ book.description }}</p> <br>
+
+							<div class="pager-area">
+                                <a class="btn btn-default check_out" href="">Add To Cart</a>
+                                <a class="btn btn-default check_out" href="">Add To Wishlist</a>
+                                <ul class="pager pull-right">
+									<li><a href="#">Pre</a></li>
+									<li><a href="#">Next</a></li>
+								</ul>
+							</div>
+						</div>
+
+
+					</div><!--/blog-post-area-->
+
+
+
+
+
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock content %}
+

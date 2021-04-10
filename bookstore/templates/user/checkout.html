@@ -1,0 +1,866 @@
+{% extends 'user/main.html'%}
+{% load static %}
+{% block content %}
+
+<div id="layout-wrapper">
+    <div class="">
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">Checkout</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="/">Book-Store</a></li>
+                                    <li class="breadcrumb-item active">Checkout</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="custom-accordion">
+
+
+
+
+                             <!---------------------------------------->
+                            <!-------------- shipping info ----------->
+                            <!---------------------------------------->
+                            <div id="shipping_info" class="card">
+                                <a href="#checkout-shippinginfo-collapse" class="text-dark" data-bs-toggle="collapse" aria-expanded="true">
+                                    <div class="p-4">
+
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3">
+                                                <i class="uil uil-truck text-primary h2"></i>
+                                            </div>
+                                            <div class="flex-1 overflow-hidden">
+                                                <h5 class="font-size-16 mb-1">Shipping Info</h5>
+
+                                                <p class="text-muted text-truncate mb-0">Add your Shipping Address here</p>
+                                            </div>
+                                            <i class="mdi mdi-chevron-up accor-down-icon font-size-24"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+
+                                <div id="checkout-shippinginfo-collapse" class="collapse show">
+                                    <div class="p-4 border-top">
+                                        <h5 class="font-size-14 mb-3">Shipping Info</h5>
+                                        <div class="row">
+                                            {% for add in address %}
+                                            <div class="col-lg-4 col-sm-6">
+
+                                                <div id="div-{{ add.id }}" class="card border rounded shipping-address">
+                                                    <div class="card-body">
+
+                                                        <a href="/del_address/{{ add.id }}" class="float-end ml-1" data-bs-toggle="tooltip"
+                                                           id="deleteadd" data-placement="top" title="" data-bs-original-title="Edit">
+                                                            <span class="material-icons"> delete </span> </a>
+                                                        <h5 class="font-size-14 mb-4"> Address: {{ forloop.counter }}</h5>
+                                                        <h5 class="font-size-14">{{ add.name|title }}</h5>
+                                                        <p class="mb-1">{{ add.address }}, {{add.city}}, {{ add.country }},
+                                                            Pin: {{ add.zip_code }}.</p>
+                                                        <p class="mb-0">Mob. {{ add.phone }}</p>
+                                                        <a id="sele-{{ add.id }}" class="btn btn-info float-end m-2 select_address" data-id="{{ add.id }}" >
+                                                            Select Address 	&nbsp; 	&nbsp;
+                                                            <span class="material-icons float-end"> check_circle_outline </span> </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            {% endfor %}
+                                            {% if not address %}
+                                            <div class="col-lg-12">
+                                                <h5 class="font-size-24 text-center text-light"> Add new Address </h5>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="row my-4">
+                                            <div class="col"></div> <!-- end col -->
+                                            <div class="col">
+                                                <div class="text-sm-end mt-2 mt-sm-0">
+                                                    <a href="#checkout-shippinginfo-collapse-add" id="modal_btn" class="btn btn-success">
+                                                        <i class="uil uil-focus-add me-1"></i> Add new </a>
+                                                </div>
+                                            </div> <!-- end col -->
+                                        </div> <!-- end row-->
+                                    </div>
+                                </div>
+
+                                <div style="display:none; position: fixed; padding-top: 0px; left: 174px; top: 155px;
+                                width: 70%; height: 64%; color:white; background-color: rgb(20, 20, 20, 90%); z-index:10;
+                                border-radius:10px; margin-top:10px;"
+                                     id="checkout-shippinginfo-collapse-add" class="modal_address">
+                                    <div class="p-4 border-top">
+                                        <form>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-3 mb-4">
+                                                            <label class="form-label" for="shipping-name">Name</label>
+                                                            <input type="text" class="form-control" id="shipping-name" placeholder="Enter name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-3 mb-4">
+                                                            <label class="form-label" for="shipping-email">Email Address</label>
+                                                            <input type="email" class="form-control" id="shipping-email" placeholder="Enter email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-3 mb-4">
+                                                            <label class="form-label" for="shipping-phone">Phone</label>
+                                                            <input type="text" class="form-control" id="shipping-phone" placeholder="Enter Phone no.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label class="form-label" for="shipping-address">Address</label>
+                                                    <textarea class="form-control" id="shipping-address" rows="3" placeholder="Enter full address"></textarea>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group mb-4 mb-lg-0">
+                                                            <label class="form-label">Country</label>
+                                                            <select id="shipping-country" class="form-control form-select" title="Country">
+                                                                <option value="0">Select Country</option>
+                                                                <option value="AF">Afghanistan</option>
+                                                                <option value="AL">Albania</option>
+                                                                <option value="DZ">Algeria</option>
+                                                                <option value="AS">American Samoa</option>
+                                                                <option value="AD">Andorra</option>
+                                                                <option value="AO">Angola</option>
+                                                                <option value="AI">Anguilla</option>
+                                                                <option value="AQ">Antarctica</option>
+                                                                <option value="AR">Argentina</option>
+                                                                <option value="AM">Armenia</option>
+                                                                <option value="AW">Aruba</option>
+                                                                <option value="AU">Australia</option>
+                                                                <option value="AT">Austria</option>
+                                                                <option value="AZ">Azerbaijan</option>
+                                                                <option value="BS">Bahamas</option>
+                                                                <option value="BH">Bahrain</option>
+                                                                <option value="BD">Bangladesh</option>
+                                                                <option value="BB">Barbados</option>
+                                                                <option value="BY">Belarus</option>
+                                                                <option value="BE">Belgium</option>
+                                                                <option value="BZ">Belize</option>
+                                                                <option value="BJ">Benin</option>
+                                                                <option value="BM">Bermuda</option>
+                                                                <option value="BT">Bhutan</option>
+                                                                <option value="BO">Bolivia</option>
+                                                                <option value="BW">Botswana</option>
+                                                                <option value="BV">Bouvet Island</option>
+                                                                <option value="BR">Brazil</option>
+                                                                <option value="BN">Brunei Darussalam</option>
+                                                                <option value="BG">Bulgaria</option>
+                                                                <option value="BF">Burkina Faso</option>
+                                                                <option value="BI">Burundi</option>
+                                                                <option value="KH">Cambodia</option>
+                                                                <option value="CM">Cameroon</option>
+                                                                <option value="CA">Canada</option>
+                                                                <option value="CV">Cape Verde</option>
+                                                                <option value="KY">Cayman Islands</option>
+                                                                <option value="CF">Central African Republic</option>
+                                                                <option value="TD">Chad</option>
+                                                                <option value="CL">Chile</option>
+                                                                <option value="CN">China</option>
+                                                                <option value="CX">Christmas Island</option>
+                                                                <option value="CC">Cocos (Keeling) Islands</option>
+                                                                <option value="CO">Colombia</option>
+                                                                <option value="KM">Comoros</option>
+                                                                <option value="CG">Congo</option>
+                                                                <option value="CK">Cook Islands</option>
+                                                                <option value="CR">Costa Rica</option>
+                                                                <option value="CI">Cote d'Ivoire</option>
+                                                                <option value="HR">Croatia (Hrvatska)</option>
+                                                                <option value="CU">Cuba</option>
+                                                                <option value="CY">Cyprus</option>
+                                                                <option value="CZ">Czech Republic</option>
+                                                                <option value="DK">Denmark</option>
+                                                                <option value="DJ">Djibouti</option>
+                                                                <option value="DM">Dominica</option>
+                                                                <option value="DO">Dominican Republic</option>
+                                                                <option value="EC">Ecuador</option>
+                                                                <option value="EG">Egypt</option>
+                                                                <option value="SV">El Salvador</option>
+                                                                <option value="GQ">Equatorial Guinea</option>
+                                                                <option value="ER">Eritrea</option>
+                                                                <option value="EE">Estonia</option>
+                                                                <option value="ET">Ethiopia</option>
+                                                                <option value="FK">Falkland Islands (Malvinas)</option>
+                                                                <option value="FO">Faroe Islands</option>
+                                                                <option value="FJ">Fiji</option>
+                                                                <option value="FI">Finland</option>
+                                                                <option value="FR">France</option>
+                                                                <option value="GF">French Guiana</option>
+                                                                <option value="PF">French Polynesia</option>
+                                                                <option value="GA">Gabon</option>
+                                                                <option value="GM">Gambia</option>
+                                                                <option value="GE">Georgia</option>
+                                                                <option value="DE">Germany</option>
+                                                                <option value="GH">Ghana</option>
+                                                                <option value="GI">Gibraltar</option>
+                                                                <option value="GR">Greece</option>
+                                                                <option value="GL">Greenland</option>
+                                                                <option value="GD">Grenada</option>
+                                                                <option value="GP">Guadeloupe</option>
+                                                                <option value="GU">Guam</option>
+                                                                <option value="GT">Guatemala</option>
+                                                                <option value="GN">Guinea</option>
+                                                                <option value="GW">Guinea-Bissau</option>
+                                                                <option value="GY">Guyana</option>
+                                                                <option value="HT">Haiti</option>
+                                                                <option value="HN">Honduras</option>
+                                                                <option value="HK">Hong Kong</option>
+                                                                <option value="HU">Hungary</option>
+                                                                <option value="IS">Iceland</option>
+                                                                <option value="IN">India</option>
+                                                                <option value="ID">Indonesia</option>
+                                                                <option value="IQ">Iraq</option>
+                                                                <option value="IE">Ireland</option>
+                                                                <option value="IL">Israel</option>
+                                                                <option value="IT">Italy</option>
+                                                                <option value="JM">Jamaica</option>
+                                                                <option value="JP">Japan</option>
+                                                                <option value="JO">Jordan</option>
+                                                                <option value="KZ">Kazakhstan</option>
+                                                                <option value="KE">Kenya</option>
+                                                                <option value="KI">Kiribati</option>
+                                                                <option value="KR">Korea, Republic of</option>
+                                                                <option value="KW">Kuwait</option>
+                                                                <option value="KG">Kyrgyzstan</option>
+                                                                <option value="LV">Latvia</option>
+                                                                <option value="LB">Lebanon</option>
+                                                                <option value="LS">Lesotho</option>
+                                                                <option value="LR">Liberia</option>
+                                                                <option value="LY">Libyan Arab Jamahiriya</option>
+                                                                <option value="LI">Liechtenstein</option>
+                                                                <option value="LT">Lithuania</option>
+                                                                <option value="LU">Luxembourg</option>
+                                                                <option value="MO">Macau</option>
+                                                                <option value="MG">Madagascar</option>
+                                                                <option value="MW">Malawi</option>
+                                                                <option value="MY">Malaysia</option>
+                                                                <option value="MV">Maldives</option>
+                                                                <option value="ML">Mali</option>
+                                                                <option value="MT">Malta</option>
+                                                                <option value="MH">Marshall Islands</option>
+                                                                <option value="MQ">Martinique</option>
+                                                                <option value="MR">Mauritania</option>
+                                                                <option value="MU">Mauritius</option>
+                                                                <option value="YT">Mayotte</option>
+                                                                <option value="MX">Mexico</option>
+                                                                <option value="MD">Moldova, Republic of</option>
+                                                                <option value="MC">Monaco</option>
+                                                                <option value="MN">Mongolia</option>
+                                                                <option value="MS">Montserrat</option>
+                                                                <option value="MA">Morocco</option>
+                                                                <option value="MZ">Mozambique</option>
+                                                                <option value="MM">Myanmar</option>
+                                                                <option value="NA">Namibia</option>
+                                                                <option value="NR">Nauru</option>
+                                                                <option value="NP">Nepal</option>
+                                                                <option value="NL">Netherlands</option>
+                                                                <option value="AN">Netherlands Antilles</option>
+                                                                <option value="NC">New Caledonia</option>
+                                                                <option value="NZ">New Zealand</option>
+                                                                <option value="NI">Nicaragua</option>
+                                                                <option value="NE">Niger</option>
+                                                                <option value="NG">Nigeria</option>
+                                                                <option value="NU">Niue</option>
+                                                                <option value="NF">Norfolk Island</option>
+                                                                <option value="MP">Northern Mariana Islands</option>
+                                                                <option value="NO">Norway</option>
+                                                                <option value="OM">Oman</option>
+                                                                <option value="PW">Palau</option>
+                                                                <option value="PA">Panama</option>
+                                                                <option value="PG">Papua New Guinea</option>
+                                                                <option value="PY">Paraguay</option>
+                                                                <option value="PE">Peru</option>
+                                                                <option value="PH">Philippines</option>
+                                                                <option value="PN">Pitcairn</option>
+                                                                <option value="PL">Poland</option>
+                                                                <option value="PT">Portugal</option>
+                                                                <option value="PR">Puerto Rico</option>
+                                                                <option value="QA">Qatar</option>
+                                                                <option value="RE">Reunion</option>
+                                                                <option value="RO">Romania</option>
+                                                                <option value="RU">Russian Federation</option>
+                                                                <option value="RW">Rwanda</option>
+                                                                <option value="KN">Saint Kitts and Nevis</option>
+                                                                <option value="LC">Saint LUCIA</option>
+                                                                <option value="WS">Samoa</option>
+                                                                <option value="SM">San Marino</option>
+                                                                <option value="ST">Sao Tome and Principe</option>
+                                                                <option value="SA">Saudi Arabia</option>
+                                                                <option value="SN">Senegal</option>
+                                                                <option value="SC">Seychelles</option>
+                                                                <option value="SL">Sierra Leone</option>
+                                                                <option value="SG">Singapore</option>
+                                                                <option value="SK">Slovakia (Slovak Republic)</option>
+                                                                <option value="SI">Slovenia</option>
+                                                                <option value="SB">Solomon Islands</option>
+                                                                <option value="SO">Somalia</option>
+                                                                <option value="ZA">South Africa</option>
+                                                                <option value="ES">Spain</option>
+                                                                <option value="LK">Sri Lanka</option>
+                                                                <option value="SH">St. Helena</option>
+                                                                <option value="PM">St. Pierre and Miquelon</option>
+                                                                <option value="SD">Sudan</option>
+                                                                <option value="SR">Suriname</option>
+                                                                <option value="SZ">Swaziland</option>
+                                                                <option value="SE">Sweden</option>
+                                                                <option value="CH">Switzerland</option>
+                                                                <option value="SY">Syrian Arab Republic</option>
+                                                                <option value="TW">Taiwan, Province of China</option>
+                                                                <option value="TJ">Tajikistan</option>
+                                                                <option value="TZ">Tanzania, United Republic of</option>
+                                                                <option value="TH">Thailand</option>
+                                                                <option value="TG">Togo</option>
+                                                                <option value="TK">Tokelau</option>
+                                                                <option value="TO">Tonga</option>
+                                                                <option value="TT">Trinidad and Tobago</option>
+                                                                <option value="TN">Tunisia</option>
+                                                                <option value="TR">Turkey</option>
+                                                                <option value="TM">Turkmenistan</option>
+                                                                <option value="TC">Turks and Caicos Islands</option>
+                                                                <option value="TV">Tuvalu</option>
+                                                                <option value="UG">Uganda</option>
+                                                                <option value="UA">Ukraine</option>
+                                                                <option value="AE">United Arab Emirates</option>
+                                                                <option value="GB">United Kingdom</option>
+                                                                <option value="US">United States</option>
+                                                                <option value="UY">Uruguay</option>
+                                                                <option value="UZ">Uzbekistan</option>
+                                                                <option value="VU">Vanuatu</option>
+                                                                <option value="VE">Venezuela</option>
+                                                                <option value="VN">Viet Nam</option>
+                                                                <option value="VG">Virgin Islands (British)</option>
+                                                                <option value="VI">Virgin Islands (U.S.)</option>
+                                                                <option value="WF">Wallis and Futuna Islands</option>
+                                                                <option value="EH">Western Sahara</option>
+                                                                <option value="YE">Yemen</option>
+                                                                <option value="ZM">Zambia</option>
+                                                                <option value="ZW">Zimbabwe</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-4 mb-lg-0">
+                                                            <label class="form-label" for="shipping-city">City</label>
+                                                            <input type="text" class="form-control" id="shipping-city" placeholder="Enter City">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="mb-0">
+                                                            <label class="form-label" for="shipping-zip_code">Zip / Postal code</label>
+                                                            <input type="number" class="form-control" id="shipping-zip_code" placeholder="Enter Postal code">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row my-4">
+                                                    <div class="col"><strong id="errmsg2" style="color:red" class="form-text"></strong></div> <!-- end col -->
+                                                    <div class="col">
+                                                        <div class="text-sm-end mt-2 mt-sm-0">
+                                                            <a href="#" id="shipping_address" class="btn btn-success ">
+                                                                <i class="uil uil-focus-add me-1"></i> Add</a>
+                                                            <a href="" id="" class="btn btn-danger close_modal me-1">
+                                                            <strong> &times; </strong> </a>
+
+                                                        </div>
+                                                    </div> <!-- end col -->
+                                                </div> <!-- end row-->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <!---------------------------------------->
+                            <!-------------- Payment info ----------->
+                            <!---------------------------------------->
+                            <div class="card">
+                                <a href="#checkout-paymentinfo-collapse" class="collapsed text-dark" data-bs-toggle="collapse">
+                                    <div class="p-4">
+
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3">
+                                                <i class="uil uil-bill text-primary h2"></i>
+                                            </div>
+                                            <div class="flex-1 overflow-hidden">
+                                                <h5 class="font-size-16 mb-1">Payment Info</h5>
+                                                <p class="text-muted text-truncate mb-0"> Select your payment methode </p>
+                                            </div>
+                                            <i class="mdi mdi-chevron-up accor-down-icon font-size-24"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+
+                                <div id="checkout-paymentinfo-collapse" class="">
+                                    <div class="p-4 border-top">
+                                        <div>
+                                            <h5 class="font-size-14 mb-3">Payment method :</h5>
+
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div data-bs-toggle="collapse">
+                                                        <label class="card-radio-label">
+                                                            <input type="radio" name="pay-method" id="razor_pay" class="card-radio-input" >
+
+                                                            <span class="card-radio text-center text-truncate">
+                                                                <i class="uil uil-postcard d-block h2 mb-3"></i>
+                                                                Razor Pay
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div>
+                                                        <label class="card-radio-label">
+                                                            <input type="radio" name="pay-method" id="pay_pal" class="card-radio-input" >
+
+                                                            <span class="card-radio text-center text-truncate">
+                                                                <i class="uil uil-paypal d-block h2 mb-3"></i>
+                                                                Paypal
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-sm-6 pay_meth_active">
+                                                    <div>
+                                                        <label class="card-radio-label">
+                                                            <input type="radio" name="pay-method" id="c_o_d" class="card-radio-input" >
+
+                                                            <span class="card-radio text-center text-truncate">
+                                                                <i class="uil uil-money-bill d-block h2 mb-3"></i>
+                                                                <span>Cash on Delivery</span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-4">
+                            <div class="col">
+                                <a href="/" class="btn btn-link text-muted">
+                                    <i class="uil uil-arrow-left me-1"></i> Continue Shopping </a>
+                            </div> <!-- end col -->
+                            <div class="col"><strong id="errmsg3" style="color:red" class="form-text"></strong></div> <!-- end col -->
+                            <div class="col">
+                                <div class="text-sm-end mt-2 mt-sm-0">
+
+                                    <a href="/order/" id="proceed_to_pay" class="btn btn-success font-size-18">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span class="material-icons me-1">payments</span>
+                                        &nbsp;&nbsp; Proceed &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row-->
+                        </div>
+
+                    </div>
+                    <!---------------------------------------->
+                    <!------------ ordersummary info --------->
+                    <!---------------------------------------->
+                    <div id="reload_offers" class="col-xl-4">
+                        <div class="card checkout-order-summary">
+                            <div class="card-body">
+                                <div class="p-3 bg-light mb-4">
+                                    <h5 class="font-size-16 mb-0">Order Summary <span class="float-end ml-2">#MN0124</span></h5>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-centered mb-0 table-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-top-0" style="width: 110px;" scope="col">Product</th>
+                                                <th class="border-top-0" scope="col">Product Desc</th>
+                                                <th class="border-top-0" scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        {% for car in my_cart %}
+                                            <tr>
+                                                <th scope="row"><img src="{{ car.book.imageurl1 }}" alt="product-img"
+                                                                     title="product-img" class="avatar-md"></th>
+                                                <td>
+                                                    <h5 class="font-size-14 text-truncate">
+                                                        <a href="ecommerce-product-detail.html" class="text-dark">
+                                                            {{ car.book.name }}</a></h5>
+                                                    <p class="text-muted mb-0">
+                                                        &#8377; {{ car.book.price|floatformat }} x {{ car.quantity }}</p>
+                                                </td>
+                                                <td>&#8377; {{ car.total_price|floatformat }}</td>
+                                            </tr>
+                                        {% endfor %}
+
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h5 class="font-size-14 m-0">Sub Total :</h5>
+                                                </td>
+                                                <td>
+                                                    &#8377; {{ sub_total|floatformat }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h5 class="font-size-14 m-0">Discount :</h5>
+                                                </td>
+                                                <td>
+                                                    - &#8377; {{ disc|floatformat }}
+                                                </td>
+                                            </tr>
+
+                                            <tr class="bg-light">
+                                                <td colspan="2">
+                                                    <h5 class="font-size-14 m-0">Total:</h5>
+                                                </td>
+                                                <td >
+                                                    <strong id="total_after_offer" class="font-size-20"> &#8377; {{ grand_total|floatformat }}
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr id="offer_tr" class="hidden" >
+                                                <td colspan="2">
+                                                    <h5 class="font-size-14 m-0">Offer Applied :</h5>
+                                                </td>
+                                                <td > <span id="offer_display"></span> % </td>
+                                            </tr>
+                                            <tr id="final_tr" class="hidden" style="background-color:#ADD8E6" >
+                                                <td colspan="2">
+                                                    <h5 class="font-size-14 m-0">Offer Price :</h5>
+                                                </td>
+                                                <td ><strong>&#8377; <span class="font-size-20 m-0" id="final_offer_total"></span></strong> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card checkout-order-summary">
+                            <div class="card-body">
+                                <h5 class="font-size-16 mb-3 text-info"> Available Offers <span class="float-end ml-2"></span></h5>
+                                <div class=" mb-4 ">
+                                    <button type="button" style="width:100%" class="btn btn-warning font-size-16 waves-effect waves-light"
+                                    id="modal2_btn" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm"> Have Special A Coupon Code?
+                                        <span class=""></span></button>
+                                </div>
+                                <div>
+                                    <div class="row">
+                                        <button id="another_offer" class="hidden btn btn-success">Select another offer</button>
+                                        {% for o in active_off %}
+                                        <div  class=" offer_activated col-lg-12">
+                                            <div class="card bg-success text-light">
+                                                <div class="card-body">
+                                                    <h5 class="mt-0  text-light">{{ o.name }}
+                                                    <strong class="mt-0 px-5 font-size-24 text-light" id="offer-{{o.id}}">{{ o.offer|floatformat }} </strong>%
+                                                    </h5>
+                                                    <input disabled class="card-text" value="{{ o.coupon_code }}">
+                                                    <button class="btn btn-light btn-sm apply_offer" data-id="{{o.id}}">Apply</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        {% for o in other_off %}
+                                        <div  class=" offer_activated col-lg-12">
+                                            <div class="card bg-info text-light">
+                                                <div class="card-body">
+                                                    <h5 class="mt-0  text-light">{{ o.name.name }}
+                                                    <strong class="mt-0 px-5 font-size-24 text-light" id="offer-{{o.name.id}}">{{ o.name.offer|floatformat }} </strong>%
+                                                    </h5>
+                                                    <input disabled class="card-text" value="{{ o.name.coupon_code }}">
+                                                    <button class="btn btn-light btn-sm apply_offer" data-id="{{o.name.id}}">Apply</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+                <!-- coupon modal -->
+                <div class="modal fade bs-example-modal-sm show" tabindex="-1" aria-labelledby="mySmallModalLabel"
+                     style="display: none; padding-right: 16px; padding-top: 160px;" aria-modal="true" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title mt-0" id="mySmallModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="mb-3 mb-4">
+                                                    <label class="form-label" for="coupon_code">Coupon Code</label>
+                                                    <input type="text" name="coupon_code" class="form-control" id="coupon_code" placeholder="Enter Coupon Code">
+                                                </div>
+                                                <input type="submit" class="form-control btn btn-success" id="coupon_btn" placeholder="ADD">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col"><strong id="errmsg4" style="color:red" class="form-text"></strong></div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+
+            </div> <!-- container-fluid -->
+        </div><!-- End Page-content -->
+
+
+
+    </div><!-- end main content-->
+
+</div><!-- END layout-wrapper -->
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--apply offer-->
+<script>
+$(".apply_offer").on("click",function() {
+    var offer_id = $(this).attr('data-id');
+    var offer = $('#offer-'+offer_id).text();
+    $('#offer_tr').removeClass('hidden');
+    $('#offer_display').text(offer);
+    $('#final_tr').removeClass('hidden');
+    $('#another_offer').removeClass('hidden');
+    $('.offer_activated').addClass('hidden');
+    var data = {
+        'csrfmiddlewaretoken' : '{{csrf_token}}',
+        'offer_id' : offer_id,
+        'offer' : offer,
+    }
+    $.ajax({
+        url:'/checkout/',
+        method:'POST',
+        data: data,
+        success:function(data){
+           $('#final_offer_total').text(data);
+
+        }
+    });
+});
+</script>
+<!--offer reload again-->
+<script>
+$("#another_offer").on("click",function() {
+    $("#reload_offers").load(" #reload_offers > *");
+});
+</script>
+<!-- add coupon with code -->
+<script>
+$("#coupon_btn").on("click",function() {
+    var coupon_code = $('#coupon_code').val();
+    console.log(coupon_code, "??????????????")
+    var data = {
+    'csrfmiddlewaretoken' : '{{csrf_token}}',
+    'coupon_code' : coupon_code,
+    }
+    if (coupon_code === "") {
+            $('#errmsg4').html("Enter Your Coupon Code")
+    }else{
+        console.log(data)
+        $.ajax({
+            url:'/add_coupon/',
+            method:'POST',
+            data: data,
+            success:function(data){
+                if (data == 'true') {
+                    window.location.replace('/checkout/')
+                }
+                else if(data == 'false') {
+                    $('#errmsg4').html("Invalid Coupon Code")
+                }
+                else if(data == '1') {
+                    $('#errmsg4').html("This Coupon is already claimed")
+                }
+                else if(data == '2') {
+                    $('#errmsg4').html("Coupon is already Used")
+                }
+            }
+        });
+    }
+});
+</script>
+<!--delete address-->
+<script>
+    $(document).on('click', '#deleteadd', function(){
+        return confirm('Are you sure you want to delete this?');
+    })
+</script>
+<!--address validation and sending-->
+<script>
+$("#shipping_address").on("click",function() {
+    var name = $('#shipping-name').val();
+    var email = $('#shipping-email').val();
+    var phone = $('#shipping-phone').val();
+    var address = $('#shipping-address').val();
+    var country = $('#shipping-country').val();
+    var city = $('#shipping-city').val();
+    var zipcode = $('#shipping-zip_code').val();
+    var atposition=email.indexOf("@");
+    var dotposition=email.lastIndexOf(".");
+
+    var data = {
+    'csrfmiddlewaretoken' : '{{csrf_token}}',
+    'name' : name,
+    'email' : email,
+    'phone' : phone,
+    'address' : address,
+    'country' : country,
+    'city' : city,
+    'zipcode' : zipcode,
+    }
+    if (name === "") {
+            $('#errmsg2').html("Enter your Full Name")
+    }
+    else if (email === "") {
+        $('#errmsg2').html("Enter your Email Address")
+    }
+    else if (atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length) {
+        $('#errmsg2').html("Enter Valid Email (example@example.com)")
+    }
+    else if (phone === "") {
+        $('#errmsg2').html("Enter your Phone Number")
+    }
+    else if (phone.length<9) {
+        $('#errmsg2').html("Phone Number Must be at least 10 digits")
+    }
+    else if (address === "") {
+        $('#errmsg2').html("Enter your Address")
+    }
+    else if (country === "") {
+        $('#errmsg2').html("Select your Country")
+    }
+    else if (city === "") {
+        $('#errmsg2').html("Enter your city")
+    }
+    else if (zipcode === "") {
+        $('#errmsg2').html("Enter your Zip/Postal Code")
+    }
+    console.log(data)
+    $.ajax({
+        url:'/shipping_address/',
+        method:'POST',
+        data: data,
+        success:function(data){
+            if (data == 'true'){
+                $("#shipping_info").load(" #shipping_info > *");
+            }
+        }
+    });
+});
+</script>
+<!--address modal-->
+<script>
+    let modalBtn = document.getElementById("modal_btn")
+    let modal = document.querySelector(".modal_address")
+    let closeBtn = document.querySelector(".close_modal")
+    modalBtn.onclick = function(){
+      modal.style.display = "block"
+    }
+    closeBtn.onclick = function(){
+      modal.style.display = "none"
+    }
+    window.onclick = function(e){
+      if(e.target == modal){
+        modal.style.display = "none"
+      }
+    }
+</script>
+<!--coupon modal-->
+<script>
+let modalBtn2 = document.getElementById("modal2_btn")
+let modal2 = document.querySelector(".bs-example-modal-sm")
+let closeBtn2 = document.querySelector(".btn-close")
+modalBtn2.onclick = function(){
+  modal2.style.display = "block"
+}
+closeBtn2.onclick = function(){
+  modal2.style.display = "none"
+}
+window.onclick = function(e){
+  if(e.target == modal2){
+    modal2.style.display = "none"
+  }
+}
+</script>
+<!--select address and paymethod on click-->
+<script>
+$(".select_address").on("click",function addressClicked() {
+    var clicked = 'address'
+    var id = $(this).attr("data-id");
+    var data = {
+    'pk' : id,
+    }
+    $.ajax({
+        url:'/select_address/',
+        method:'post',
+        data: data,
+        success:function(data){
+            if (data == 'true'){
+                $('.shipping-address').removeClass('active')
+                $('#div-'+id).addClass(' active ');
+            }
+        }
+    });
+    return clicked;
+});
+
+$(".card-radio-input").on("click",function payClicked() {
+    var clicked = 'address'
+    var yap = document.querySelectorAll('input[name="pay-method"]:checked');
+    var pay = yap[0].id
+    var data = {
+    'pay' : pay,
+    }
+    $.ajax({
+        url:'/select_pay_methode/',
+        method:'post',
+        data: data,
+        success:function(data){
+            if (data == 'true'){
+                $('.pay_meth_active').addClass('active');
+                console.log(pay)
+            }
+        }
+    });
+    return clicked;
+});
+</script>
+
+<!--$('#proceed_to_pay').attr('href', '/order/')-->
+
+{% endblock content %}

@@ -1,0 +1,240 @@
+{% extends 'user/main.html'%}
+{% load static %}
+{% block content %}
+
+
+<div id="layout-wrapper">
+    <div class="">
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">Book Detail</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="/">Book-Store</a></li>
+                                    <li class="breadcrumb-item active">Book Detail</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-5">
+                                        <div class="product-detail">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                        <a class="nav-link active" id="product-1-tab" data-bs-toggle="pill" href="#product-1" role="tab">
+                                                            <img src="{{ book.imageurl1 }}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
+                                                        </a>
+                                                        <a class="nav-link" id="product-2-tab" data-bs-toggle="pill" href="#product-2" role="tab">
+                                                            <img src="{{ book.imageurl2 }}" alt="" class="img-fluid mx-auto d-block tab-img rounded">
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="tab-content position-relative" id="v-pills-tabContent">
+                                                        <div class="product-wishlist">
+                                                            <a href="#">
+                                                                <i class="mdi mdi-heart-outline"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="tab-pane fade show active" id="product-1" role="tabpanel">
+                                                            <div class="product-img">
+                                                                <img style="height:200px; width:140px;" src="{{ book.imageurl1 }}" alt="" class="img-fluid mx-auto d-block zoom_image" data-zoom-image="{{ book.imageurl1 }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="product-2" role="tabpanel">
+                                                            <div class="product-img">
+                                                                <img style="height:200px; width:140px;" src="{{ book.imageurl2 }}" alt="" class="img-fluid mx-auto d-block zoom_image" data-zoom-image="{{ book.imageurl2 }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row text-center mt-2">
+                                                        <div class="col-sm-6 d-grid">
+                                                            <a href="/add_to_cart/{{ book.id }}">
+                                                                <button type="button" class="btn btn-primary btn-block waves-effect waves-light mt-2 me-1">
+                                                                <i class="uil uil-shopping-cart-alt me-2"></i> Add to cart
+                                                            </button>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-sm-6 d-grid">
+                                                            <a href="/buy_now/{{ book.id }}">
+                                                                <button type="button" class="btn btn-light btn-block waves-effect  mt-2 waves-light">
+                                                                <i class="uil uil-shopping-basket me-2"></i>Buy now
+                                                            </button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-7">
+                                        <div class="mt-4 mt-xl-3 ps-xl-4">
+                                            <h5 class="font-size-14"><a href="#" class="text-muted">{{ book.category.category }}</a></h5>
+                                            <h4 class="font-size-20 mb-3">{{ book.name }}</h4>
+                                            <h5 class="font-size-14"><a href="#" class="text-muted">{{ book.author.name }}</a></h5>
+                                            <div class="text-muted">
+                                                <span class="badge bg-success font-size-14 me-1"><i class="mdi mdi-star"></i> 4.2</span> 234 Reviews
+                                            </div>
+
+                                            <h5 class="mt-4 pt-2"><del class="text-muted me-2">&#8377; {{ book.price|floatformat  }}</del>&#8377; {{ book.disc_price|floatformat  }}<span class="text-danger font-size-14 ms-2">-{{ book.offer|floatformat }}% Off</span></h5>
+                                            <p class="mt-4 text-muted"></p>
+
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mt-3">
+                                                            <h5 class="font-size-14">Specification :</h5>
+                                                            <ul class="list-unstyled product-desc-list text-muted">
+                                                                <li><i class="mdi mdi-circle-medium me-1 align-middle"></i> High Quality Paper</li>
+                                                                <li><i class="mdi mdi-circle-medium me-1 align-middle"></i> Paper Back</li>
+                                                                <li><i class="mdi mdi-circle-medium me-1 align-middle"></i> Publisher: {{ book.publisher}}</li>
+                                                                <li><i class="mdi mdi-circle-medium me-1 align-middle"></i>
+                                                                    Total Pages: {{ book.page_no }}</li>
+                                                                <li><i class="mdi mdi-circle-medium me-1 align-middle"></i> Edition: {{ book.edition}}</li>
+                                                                <li><i class="mdi mdi-circle-medium me-1 align-middle"></i> Published Year: {{ book.year}}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="mt-3">
+                                                            <h5 class="font-size-14">Services :</h5>
+                                                            <ul class="list-unstyled product-desc-list text-muted">
+                                                                <li><i class="uil uil-exchange text-primary me-1 font-size-16"></i> 10 Days Replacement</li>
+                                                                <li><i class="uil uil-bill text-primary me-1 font-size-16"></i> Cash on Delivery available</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--deliery pin location-->
+                                                <div class="mt-3">
+<!--                                                    <h5 class="font-size-14 mb-3"><i class="uil uil-location-pin-alt font-size-20 text-primary align-middle me-2"></i> Delivery location</h5>-->
+<!--                                                    <div class="d-inline-flex">-->
+<!--                                                        <div class="input-group mb-3">-->
+<!--                                                            <input type="text" class="form-control" placeholder="Enter Delivery pincode ">-->
+<!--                                                            <button class="btn btn-light" type="button">Check</button>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+                                                </div>
+                                                <!--deliery pin location-->
+                                                    <div class="row">
+
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="mt-4">
+                                    <h5 class="font-size-14 mb-3"> </h5>
+                                    <div class="product-desc">
+                                        <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+                                            <li class="nav-item">
+                                              <a class="nav-link" id="desc-tab" data-bs-toggle="tab" href="#desc" role="tab">Book Description</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link active" id="specifi-tab" data-bs-toggle="tab" href="#specifi" role="tab">Specifications</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" id="auth-tab" data-bs-toggle="tab" href="#author" role="tab">Author</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content border border-top-0 p-4">
+                                            <div class="tab-pane fade" id="desc" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-3 col-md-2 p-3">
+                                                        <div>
+                                                            <img style="width:100px; height:140px;" src="{{ book.imageurl1 }}" alt="" class="img-fluid mx-auto d-block">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-9 col-md-10">
+                                                        <div class="text-muted p-2">
+                                                            <p>{{ book.description }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade show active" id="specifi" role="tabpanel">
+                                                <div class="table-responsive">
+                                                    <table class="table table-nowrap mb-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row" style="width: 20%;">Category</th>
+                                                                <td>{{ book.category.category }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Publisher</th>
+                                                                <td>{{ book.publisher }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Cover</th>
+                                                                <td>Paper Back</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Page Quality</th>
+                                                                <td>High</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Published Year</th>
+                                                                <td>{{ book.year }}</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="author" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-3 col-md-2 p-3">
+                                                        <div>
+                                                            <img style="width:100px; height:140px;" src="" alt="author's img" class="img-fluid mx-auto d-block">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-9 col-md-10">
+                                                        <div class="text-muted p-2">
+                                                            <h5>{{ book.author.name }}</h5>
+                                                            <p>{{ book.author.description }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end row -->
+            </div> <!-- container-fluid -->
+        </div><!-- End Page-content -->
+    </div><!-- end main content-->
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.5.0/jquery.zoom.min.js" integrity="sha512-bhradwVeLNK+x3r23T0xT1lJXmDIxXs6dgB5d80jc/lssPjGTobgXqiqPA2EHjpcs49X1mLsQQvETOxzQc7zag==" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/2.2.3/jquery.elevatezoom.min.js" integrity="sha512-UH428GPLVbCa8xDVooDWXytY8WASfzVv3kxCvTAFkxD2vPjouf1I3+RJ2QcSckESsb7sI+gv3yhsgw9ZhM7sDw==" crossorigin="anonymous"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/2.2.3/jquery.elevatezoom.min.js" integrity="sha512-UH428GPLVbCa8xDVooDWXytY8WASfzVv3kxCvTAFkxD2vPjouf1I3+RJ2QcSckESsb7sI+gv3yhsgw9ZhM7sDw==" crossorigin="anonymous"></script>
+<script>
+    $(".zoom_image").elevateZoom({
+        zoomType: "lens",
+        lensShape : "round",
+        lensSize    : 100
+    });
+</script>
+
+{% endblock content %}
+
