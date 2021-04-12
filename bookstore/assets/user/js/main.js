@@ -1,32 +1,56 @@
-/*price range*/
+//-----------------------------------------------------//
+//---------cart count adding front and back----------- //
+//-----------------------------------------------------//
+$(".button").on("click", function() {
+    var $button = $(this);
+    cartid = $(this).attr("data-cartid");
+    var oldValue = $('#qty-'+cartid).val();
 
-if ($.fn.slider) {
-    $('#sl2').slider();
-}
+    if ($button.text() == "+") {
+        var newVal = parseFloat(oldValue) + 1;
+    } else {
+        if (oldValue > 1) {
+            var newVal = parseFloat(oldValue) - 1;
+        } else {
+            newVal = 1;
+        }
+    }
+    $('#qty-'+cartid).val(newVal);
+    $("#here").load(" #here > *");
+});
+$(".button").click(function() {
+    var $button = $(this);
+    var cartid = $(this).attr("data-cartid");
+    var qty = $('#qty-'+cartid).val();
+    var price = $('#price-'+cartid).attr("data-price");
+    var disc_price = $('#disc_price-'+cartid).attr("data-disc_price");
+    var total = qty * disc_price;
+    document.getElementById('total-'+cartid).innerHTML = total;
+    $("#here").load(" #here > *");
 
-var RGBChange = function () {
-    $('#RGB').css('background', 'rgb(' + r.getValue() + ',' + g.getValue() + ',' + b.getValue() + ')')
-};
-
-/*scroll to top*/
-
-$(document).ready(function () {
-    $(function () {
-        $.scrollUp({
-            scrollName: 'scrollUp', // Element ID
-            scrollDistance: 300, // Distance from top/bottom before showing element (px)
-            scrollFrom: 'top', // 'top' or 'bottom'
-            scrollSpeed: 300, // Speed back to top (ms)
-            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
-            animation: 'fade', // Fade, slide, none
-            animationSpeed: 200, // Animation in speed (ms)
-            scrollTrigger: false, // Set a custom triggering element. Can be an HTML string or jQuery object
-            //scrollTarget: false, // Set a custom target element for scrolling to the top
-            scrollText: '<i class="fa fa-angle-up"></i>', // Text for element, can contain HTML
-            scrollTitle: false, // Set a custom <a> title if required.
-            scrollImg: false, // Set true to use image
-            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-            zIndex: 2147483647 // Z-Index for the overlay
-        });
+    var data = {
+    'qty' : qty,
+    'pk' : cartid,
+    }
+    $.ajax({
+        url:'/cart_count/',
+        method:'POST',
+        data: data,
+        success:function(data){
+            if (data == 'true'){
+                window.location.replace('/cart/')
+            }
+        }
     });
 });
+//$(document).ready(function () {
+//    var cartid = $('.button').attr("data-cartid");
+//    var qty = $('#qty-'+cartid).val();
+//    var price = $('#price-'+cartid).attr("data-price");
+//    var disc_price = $('#disc_price-'+cartid).attr("data-disc_price");
+//    var total = qty * disc_price;
+//    document.getElementById('total-'+cartid).innerHTML = total;
+//});
+//-----------------------------------------------------//
+//-------------------Billing Address ----------------- //
+//-----------------------------------------------------//
