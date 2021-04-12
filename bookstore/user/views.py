@@ -295,7 +295,6 @@ def edit_profile(request):
         else:
             prof.user.save()
             prof.save()
-            print('saveddddd>>>>>>>')
             return JsonResponse('true', safe=False)
     else:
         prof = Profile.objects.get(user=request.user)

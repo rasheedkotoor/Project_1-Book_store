@@ -77,7 +77,6 @@ def home(request):
         d = today - datetime.timedelta(days=c)
         c += 1
         one_day = Order.objects.filter(start_date=d)
-        print(one_day, 'adsfasdfsadf')
         price = 0
         for one in one_day:
             price += one.price
@@ -101,7 +100,6 @@ def login(request):
         p_word2 = request.POST['p_word1']
         if u_name2 == 'admin' and p_word2 == '123':
             request.session["key"] = 'sessionkey'
-            # print(request)
             return JsonResponse('true', safe=False)
         else:
             return JsonResponse('false', safe=False)
@@ -358,6 +356,6 @@ def coupon(request):
         count = 0
         for i in null_offer:
             bulk_coupon = BulkCoupon.objects.values('name').annotate(Count('id')).order_by().filter(id__count__gt=0)
-            print(bulk_coupon.id__count, "//////////////////////")
+            # print(bulk_coupon.id__count, "//////////////////////")
         context = {'bulk_coupon': bulk_coupon, 'null_offer': null_offer}
         return render(request, 'admin/coupon.html', context)
