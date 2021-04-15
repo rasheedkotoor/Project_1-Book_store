@@ -58,7 +58,7 @@
                   <th>Offer %</th>
                   <th>Status</th>
                   <th>Number of Users</th>
-                  <th class="float-sm-right text-center">Edit</th>
+<!--                  <th class="float-sm-right text-center">Edit</th>-->
                 </tr>
               </thead>
               <tbody class="search_here">
@@ -73,12 +73,12 @@
 <!--                      <input class="btn btn-info btn-sm addofferbtn" id="addofferbtn-{{ cat.category }}" type="submit" data-cat="{{ cat.category }}" value="ADD">-->
 <!--                    </form>-->
                   </td>
-                  <td class="text-info">{{bulk_coupon.id__count}}</td>
-                  <td class="float-sm-right">
-                    <a href="/admin/del_cat/{{ cat.id }}"  id="deletebtn" class="btn btn-danger">
-                      delete
-                    </a>
-                  </td>
+                  <td class="text-info">{{bulk_coupon.count}}</td>
+<!--                  <td class="float-sm-right">-->
+<!--                    <a href="/admin/del_cup/{{ c0up.id }}"  id="deletebtn" class="btn btn-danger">-->
+<!--                      delete-->
+<!--                    </a>-->
+<!--                  </td>-->
                 </tr>
                 {% endfor %}
               </tbody>
