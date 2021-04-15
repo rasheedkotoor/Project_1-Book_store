@@ -86,19 +86,25 @@ def cart_count(request):
 
 
 def add_to_cart(request, pk):
-    book = Books.objects.get(pk=pk)
-    mycart, created = Cart.objects.get_or_create(user=request.user, book=book, status='Pending')
-    mycart.quantity += 1
-    mycart.save()
-    return redirect(home)
+    if request.user.is_authenticated:
+        book = Books.objects.get(pk=pk)
+        mycart, created = Cart.objects.get_or_create(user=request.user, book=book, status='Pending')
+        mycart.quantity += 1
+        mycart.save()
+        return redirect(home)
+    else:
+        return redirect(login)
 
 
 def buy_now(request, pk):
-    book = Books.objects.get(pk=pk)
-    mycart, created = Cart.objects.get_or_create(user=request.user, book=book, status='Pending')
-    mycart.quantity += 1
-    mycart.save()
-    return redirect(cart)
+    if request.user.is_authenticated:
+        book = Books.objects.get(pk=pk)
+        mycart, created = Cart.objects.get_or_create(user=request.user, book=book, status='Pending')
+        mycart.quantity += 1
+        mycart.save()
+        return redirect(cart)
+    else:
+        return redirect(login)
 
 
 def delete_cart(request, pk):
