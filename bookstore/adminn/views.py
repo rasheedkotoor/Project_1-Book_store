@@ -353,9 +353,12 @@ def coupon(request):
         return redirect(coupon)
     else:
         null_offer = Coupon.objects.filter(user__isnull=True)
-        count = 0
-        for i in null_offer:
-            bulk_coupon = BulkCoupon.objects.values('name').annotate(Count('id')).order_by().filter(id__count__gt=0)
-            # print(bulk_coupon.id__count, "//////////////////////")
-        context = {'bulk_coupon': bulk_coupon, 'null_offer': null_offer}
+        if null_offer.exists():
+            for i in null_offer:
+                bulk_coupon = BulkCoupon.objects.values('name').annotate(Count('id'))
+                # print(bulk_coupon.count(), "//////////////////////")
+                count = bulk_coupon.count()
+            context = {'bulk_coupon': bulk_coupon, 'null_offer': null_offer}
+        else:
+            context = {}
         return render(request, 'admin/coupon.html', context)
